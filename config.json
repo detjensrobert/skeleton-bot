@@ -1,6 +1,8 @@
 {
 	"prefix": "!PREFIX",
 	
+	"loglevel": "4",
+	
 	"colors": {
 		"success": "#4CAF50",
 		"error": "#f44336",

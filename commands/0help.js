@@ -1,5 +1,5 @@
 const Discord = require('discord.js');
-const { log } = require('../utils/log.js')
+const { log } = require('../utils/log.js');
 
 const options = {
 
@@ -23,7 +23,7 @@ async function execute(message) {
 	// pull config from client
 	const config = message.client.config;
 
-	log('INFO', "Showing help");
+	log.info("Showing help");
 
 	const commands = message.client.commands;
 
@@ -54,9 +54,9 @@ async function execute(message) {
 			}
 
 			helpEmbed.addField(`**${cmd.name}**` + (cmd.aliases ? ", " + cmd.aliases.join(", ") : ""), helpStr);
-			
+
 		}
-		
+
 	});
 
 	message.channel.send(helpEmbed);

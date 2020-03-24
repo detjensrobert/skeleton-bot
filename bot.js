@@ -1,32 +1,31 @@
 console.log("[ START ] Starting up...");
 const Discord = require('discord.js');
 const client = new Discord.Client();
-const { log, error } = require('./utils/log.js')
+const log = require('./utils/log.js');
 
 // file i/o
 const fs = require('fs');
 
 // grab settings from file
 const { token } = require('./token.json');
-client.config = require('./config.json');
+const config = require('./utils/config.js');
 
 // connect to mongodb server
-const MongoClient = require('mongodb').MongoClient;
-const mdbconf = require('./mongodb_config.json');
-mdbconf.port = mdbconf.port || "27017";
-const mongoURL = `mongodb://${mdbconf.user}:${mdbconf.pass}@${mdbconf.host}:${mdbconf.port}/`;
-let db;
+// ~ const MongoClient = require('mongodb').MongoClient;
+// ~ const mdbconf = require('./mongodb_config.json');
+// ~ mdbconf.port = mdbconf.port || "27017";
+// ~ const mongoURL = `mongodb://${mdbconf.user}:${mdbconf.pass}@${mdbconf.host}:${mdbconf.port}/`;
 
 // import commands from dir
 client.commands = new Discord.Collection();
 const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
 
-log('START', "Adding commands...")
+log.start("Adding commands...");
 for (const file of commandFiles) {
 	const command = require("./commands/" + file);
 	client.commands.set(command.name, command);
 
-	log('START', "  " + command.name);
+	log.start("- " + command.name);
 }
 
 const cooldowns = new Discord.Collection();
@@ -36,7 +35,7 @@ const cooldowns = new Discord.Collection();
 
 
 client.once('ready', () => {
-	log('START', "Ready.");
+	log.start("Ready.");
 });
 
 client.on('message', message => {
@@ -102,9 +101,9 @@ client.on('message', message => {
 		setTimeout(() => timestamps.delete(message.author.id), cooldownAmount);
 	}
 
-	
+
 	// since everything's ok, execute command
-	command.execute(message, args, db);
+	command.execute(message, args);
 
 });
 
@@ -114,15 +113,15 @@ client.on('message', message => {
 
 // Login to Mongo database,
 // then to Discord once db is ready
-log('START', `Connecting to MongoDB... ( ${mongoURL} )`);
-MongoClient.connect(mongoURL, function(err, mongoclient) {
-	if (err) { throw err; }
+// ~ log.start(`Connecting to MongoDB... ( ${mongoURL} )`);
+// ~ MongoClient.connect(mongoURL, function(err, mongoclient) {
+// ~ if (err) { throw err; }
 
-	db = mongoclient.db(mdbconf.dbname);
+// ~ client.db = mongoclient.db(mdbconf.dbname);
 
-	log('START', "Logging in to Discord...");
-	client.login(token);
-});
+log.start("Logging in to Discord...");
+client.login(token);
+// ~ });
 
 // catch and log promise rejections
-process.on('unhandledRejection', err => error('ERROR', "Uncaught Promise Rejection!\n", err));
+process.on('unhandledRejection', err => log.error("Uncaught Promise Rejection!\n" + err));
