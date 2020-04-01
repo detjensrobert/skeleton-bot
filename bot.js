@@ -73,7 +73,7 @@ client.on('message', message => {
 
 	// argument count
 	if (command.minArgs && args.length < command.minArgs) {
-		const errEmbed = new Discord.RichEmbed().setColor(config.colors.error)
+		const errEmbed = new Discord.MessageEmbed().setColor(config.colors.error)
 			.setTitle("Oops! Are you missing something?")
 			.addField("Usage:", `\`${config.prefix}${command.name} ${command.usage}\``);
 		return message.channel.send(errEmbed);
@@ -92,7 +92,7 @@ client.on('message', message => {
 
 			if (now < expirationTime) {
 				const timeLeft = (expirationTime - now) / 1000;
-				const errEmbed = new Discord.RichEmbed().setColor(config.colors.error)
+				const errEmbed = new Discord.MessageEmbed().setColor(config.colors.error)
 					.setTitle(`Wait ${timeLeft.toFixed(1)} more second(s) to call this again.`);
 				return message.channel.send(errEmbed);
 			}

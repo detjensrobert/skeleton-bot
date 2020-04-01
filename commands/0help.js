@@ -27,7 +27,7 @@ async function execute(message) {
 
 	const commands = message.client.commands;
 
-	const helpEmbed = new Discord.RichEmbed().setColor(config.colors.info)
+	const helpEmbed = new Discord.MessageEmbed().setColor(config.colors.info)
 		.setAuthor(`${message.client.user.username} Help`, message.client.user.displayAvatarURL)
 		.setFooter(`${message.client.user.username} created by WholeWheatBagels`, 'https://cdn.discordapp.com/avatars/197460469336899585/efb49d183b81f30c42b25517e057a704.png');
 

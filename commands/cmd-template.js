@@ -21,7 +21,7 @@ async function execute(message, args) {
 
 	log.info("Executing template command...");
 
-	const embed = new Discord.RichEmbed().setColor(config.color.success)
+	const embed = new Discord.MessageEmbed().setColor(config.color.success)
 		.setTitle("Template command!")
 		.addField("Args:", args.join(', '));
 
