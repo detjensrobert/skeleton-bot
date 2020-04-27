@@ -1,12 +1,6 @@
-# BOT_NAME
+# Bot Skeleton
 
-Short description.
-
-------------
-
-### Overview
-
-Big picture overview of what the bot does.
+Simple discord bot framework. Allows for modular commands, role restriction, argument count, and MongoDB.
 
 ------------
 
@@ -20,21 +14,21 @@ Big picture overview of what the bot does.
 ### Setup
 Main file is `bot.js`.  `npm start` will start the bot with pm2, `npm run once` will start the bot normally.
 
-Bot token goes in `token.json`. Create if not present:
+Bot token is read from envvar `BOT_TOKEN` or from file `token.json`. Create if not present:
 ```
 {
-  "token": "TOKEN HERE"
+  "token": "TOKEN_HERE"
 }
 ```
 
-Settings file: `config.json`:
+Settings file `config.json`:
 ```
 {
   "prefix": "!"
   
   // for the log functions, 0-4
   //   0: no logs outputted
-  //   1: only START
+  //   1: only ERR
   //   2: START, ERR
   //   3: START, ERR, WARN
   //   4: START, ERR, WARN, INFO

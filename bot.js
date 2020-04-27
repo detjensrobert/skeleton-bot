@@ -6,8 +6,8 @@ const log = require('./utils/log.js');
 // file i/o
 const fs = require('fs');
 
-// grab settings from file
-const { token } = require('./token.json');
+// grab settings from files
+const token = process.env.BOT_TOKEN || require('./token.json').token;
 const config = require('./utils/config.js');
 
 // connect to mongodb server
@@ -65,8 +65,8 @@ client.on('message', message => {
 	if (!command) return;
 
 
-	//   ===   CHECK COMMAND OPTIONS   ===
 
+	//   ===   CHECK COMMAND OPTIONS   ===
 
 	// role restricted
 	if (command.roleRestrict && !message.member.roles.has(config.roles[`${command.roleRestrict}`])) return;

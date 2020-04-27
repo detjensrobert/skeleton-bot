@@ -25,13 +25,13 @@ function strHeader(type) {
 	return "[ " + c.grey(d.toLocaleString()) + " | " + str + " ]";
 }
 
-function start(message) { if (config.loglevel > 0) console.log(strHeader('START'), message); }
-function err(message) { if (config.loglevel > 1) console.log(strHeader('ERR!'), message); }
-function warn(message) { if (config.loglevel > 2) console.log(strHeader('WARN'), message); }
-function info(message) { if (config.loglevel > 3) console.log(strHeader('INFO'), message); }
+function err  (message) { if (config.loglevel > 0) console.log(strHeader('ERR!'), message); }
+function start(message) { if (config.loglevel > 1) console.log(strHeader('START'), message); }
+function warn (message) { if (config.loglevel > 2) console.log(strHeader('WARN'), message); }
+function info (message) { if (config.loglevel > 3) console.log(strHeader('INFO'), message); }
 
 
+module.exports.err   = err;
 module.exports.start = start;
-module.exports.err = err;
-module.exports.warn = info;
-module.exports.info = info;
+module.exports.warn  = warn;
+module.exports.info  = info;
